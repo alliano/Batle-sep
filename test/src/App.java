@@ -34,7 +34,7 @@ public class  App {
         
         if(!cond){
             System.out.println("======================");
-            System.err.println("goodbeye");
+            System.err.println("good beye");
             System.out.println("======================");
         }
         return cond;
