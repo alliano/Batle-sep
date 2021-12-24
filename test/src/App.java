@@ -2,7 +2,15 @@ import java.util.Scanner;
 
 public class  App {
     public static void main(String[] args) throws Exception {
-        
+        System.out.println("\n");
+        System.out.println("\t\t====================");
+        System.out.println("\t\t=====BATLE SHIP=====");
+        System.out.println("\t\t====================");
+        System.out.println("\n");
+        Scanner terminalInput = new Scanner(System.in);
+        System.out.print("masukan nilai Tebakan anda : ");
+        int tebakanUser = terminalInput.nextInt();
+        System.out.println(tebakanUser);
         loop(9);
 
     }
@@ -14,7 +22,7 @@ public class  App {
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
-                    System.out.print(" ");
+                    System.out.print("@");
                 }
             
                 System.out.println("|" + i);
