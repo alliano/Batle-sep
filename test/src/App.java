@@ -7,17 +7,18 @@ public class  App {
         System.out.println("\t\t=====BATLE SHIP=====");
         System.out.println("\t\t====================");
         System.out.println("\n");
-        Scanner terminalInput = new Scanner(System.in);
-        System.out.print("masukan nilai Tebakan anda : ");
-        int tebakanUser = terminalInput.nextInt();
-        System.out.println(tebakanUser);
         loop(9);
-
+        
     }
-
+    
     private static void loop(int increment){
         Boolean next = true;
         while(next){
+            Scanner terminalInput = new Scanner(System.in);
+            System.out.print("masukan nilai Tebakan anda : ");
+            int tebakanUser = terminalInput.nextInt();
+            System.out.println(tebakanUser);
+            
             System.out.println("  123456789");
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
