@@ -15,15 +15,36 @@ public class  App {
         Boolean next = true;
         while(next){
             Scanner terminalInput = new Scanner(System.in);
-            System.out.print("masukan nilai Tebakan anda : ");
-            int tebakanUser = terminalInput.nextInt();
-            System.out.println(tebakanUser);
             
-            System.out.println("  123456789");
+            // seep1
+            System.out.println("shep1");
+            int[] shep1 = Shep();
+            // shep2
+            System.out.println("shep2");
+            int[] shep2 = Shep();
+            // shep3
+            System.out.println("shep3");
+            int[] shep3 = Shep();
+            // shep4
+            System.out.println("shep4");
+            int[] shep4 = Shep();
+            // shep5
+            System.out.println("shep5");
+            int[] shep5 = Shep();
+            
+
+            int[][] arrays = {
+                shep1,
+                shep2,
+                shep3,
+                shep4,
+                shep5
+            };
+            System.out.println("\n  123456789");
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
-                    System.out.print("@");
+                    System.out.print(" ");
                 }
             
                 System.out.println("|" + i);
@@ -57,6 +78,20 @@ public class  App {
             System.out.println("======================");
         }
         return cond;
+
+    }
+
+
+    private static int[] Shep(){
+        int cordinat_x,cordinat_y;
+        Scanner terminalInput = new Scanner(System.in);
+        System.out.print("Enter cordinate X : ");
+        cordinat_x = terminalInput.nextInt();
+        System.out.print("Enter cordinat Y : ");
+        cordinat_y = terminalInput.nextInt();
+        int[] cordinat = {cordinat_x,cordinat_y};
+        System.out.println("\n");
+        return cordinat;
 
     }
 
