@@ -39,10 +39,20 @@ public class  App {
         Scanner terminalInput = new Scanner(System.in);
         String inputuser = terminalInput.nextLine();
         Boolean cond = inputuser.equalsIgnoreCase("y");
-        
+
+        while(!inputuser.equalsIgnoreCase("y") && !inputuser.equalsIgnoreCase("n")){
+            System.out.println("======================");
+            System.err.println("u just can choose [Y/N]");
+            System.out.println("======================");  
+
+            System.out.print(message + "[Y/N]");
+              inputuser = terminalInput.nextLine();
+              cond = inputuser.equalsIgnoreCase("y");
+        }
+
         if(!cond){
             System.out.println("======================");
-            System.err.println("good beye");
+            System.err.println("======good beye=======");
             System.out.println("======================");
         }
         return cond;
