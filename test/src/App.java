@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class  App {
@@ -40,11 +41,23 @@ public class  App {
                 shep4,
                 shep5
             };
+            array(arrays);
             System.out.println("\n  123456789");
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
+                   
+                    for(int k = 0; k < arrays.length; k++){
+                        for(int l = 0; l < arrays[k].length; l++){
+                            if (i == arrays[k][l]){
+                                if (j == arrays[k][l]) {
+                                    System.out.print("#");
+                                }
+                            }
+                        } 
+                    }
                     System.out.print(" ");
+                    
                 }
             
                 System.out.println("|" + i);
@@ -95,7 +108,12 @@ public class  App {
 
     }
 
-
-
+private static void array(int[][] arr){
+    for (int i = 0; i < arr.length; i++) {
+        String array = Arrays.toString(arr[i]);
+        System.out.println(array);
+        System.out.println(arr[i].length);
+    }
+}
 
 }
