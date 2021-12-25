@@ -48,13 +48,9 @@ public class  App {
                 for(int j = 0; j < increment; j++){
                    
                     for(int k = 0; k < arrays.length; k++){
-                        for(int l = 0; l < arrays[k].length; l++){
-                            if (i == arrays[k][l]){
-                                if (j == arrays[k][l]) {
-                                    System.out.print("#");
-                                }
-                            }
-                        } 
+                        if (i == arrays[k][0] && j == arrays[k][1]){
+                            System.out.print("#");
+                        }
                     }
                     System.out.print(" ");
                     
