@@ -1,15 +1,20 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
+// on development
+
 public class  App {
+    private static final String sea = "0123456789";
+    private static final String shep = "#";
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         System.out.println("\t\t====================");
         System.out.println("\t\t=====BATLE SHIP=====");
         System.out.println("\t\t====================");
         System.out.println("\n");
-        loop(9);
-        
+        loop(9);       
     }
     
     private static void loop(int increment){
@@ -32,7 +37,6 @@ public class  App {
             // shep5
             System.out.println("shep5");
             int[] shep5 = Shep();
-            
 
             int[][] arrays = {
                 shep1,
@@ -41,24 +45,30 @@ public class  App {
                 shep4,
                 shep5
             };
-            array(arrays);
-            System.out.println("\n  123456789");
+            List<List<String>> arena = loopSea();
+            System.out.println(arena);
+            List<List<String>> newArena = setShep(arrays, arena);
+
+            System.out.println(newArena);
+
+
+
+            
+
+
+        
+
+            System.out.println("\n  0123456789");
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
-                   
-                    for(int k = 0; k < arrays.length; k++){
-                        if (i == arrays[k][0] && j == arrays[k][1]){
-                            System.out.print("#");
-                        }
-                    }
-                    System.out.print(" ");
+                    System.out.print(newArena.get(i).get(j));
                     
                 }
             
                 System.out.println("|" + i);
             }
-            System.out.println("  123456789");
+            System.out.println("  0123456789");
             System.out.println("\n");
             next = isnext("apakah kamu mau lanjut? ");
         }
@@ -86,6 +96,7 @@ public class  App {
             System.err.println("======good beye=======");
             System.out.println("======================");
         }
+        
         return cond;
 
     }
@@ -104,12 +115,32 @@ public class  App {
 
     }
 
-private static void array(int[][] arr){
-    for (int i = 0; i < arr.length; i++) {
-        String array = Arrays.toString(arr[i]);
-        System.out.println(array);
-        System.out.println(arr[i].length);
+    private static void array(int[][] arr){
+        for (int i = 0; i < arr.length; i++) {
+            String array = Arrays.toString(arr[i]);
+            System.out.println(array);
+            System.out.println(arr[i].length);
+        }
     }
-}
+    private static List<List<String>> loopSea(){
+        List<List<String>> arrays = new ArrayList<>();
 
+        for (int i = 0; i < sea.length(); i++) {
+           arrays.add(new ArrayList<>());
+           for(int j = 0; j < sea.length(); j++){
+               arrays.get(i).add(" ");
+           }
+        }
+       
+        return arrays;
+    }
+
+    private static List<List<String>> setShep(int[][] _cordinat_x_y,List<List<String>> arena){
+        
+        for (int i = 0; i < _cordinat_x_y.length; i++) {
+            arena.get(_cordinat_x_y[i][0]).set(_cordinat_x_y[i][1], shep);
+        }
+        return arena;
+    }
+  
 }
