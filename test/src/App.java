@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 // on development
@@ -8,6 +9,7 @@ import java.util.Scanner;
 public class  App {
     private static final String sea = "0123456789";
     private static final String shep = "#";
+    private static final String shepC = "@";
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         System.out.println("\t\t====================");
@@ -46,19 +48,17 @@ public class  App {
                 shep5
             };
             List<List<String>> arena = loopSea();
-            System.out.println(arena);
-            List<List<String>> newArena = setShep(arrays, arena);
+          
+            int[][] computer = Computer(arrays);
+            List<List<String>> newArena = setShep(computer,arrays, arena);
 
-            System.out.println(newArena);
+            System.out.println(Arrays.deepToString(arrays));
+            System.out.println(Arrays.deepToString(computer));
+
+     
 
 
-
-            
-
-
-        
-
-            System.out.println("\n  0123456789");
+            System.out.println("\n  "+sea);
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
@@ -68,7 +68,7 @@ public class  App {
             
                 System.out.println("|" + i);
             }
-            System.out.println("  0123456789");
+            System.out.println("  "+sea);
             System.out.println("\n");
             next = isnext("apakah kamu mau lanjut? ");
         }
@@ -114,14 +114,6 @@ public class  App {
         return cordinat;
 
     }
-
-    private static void array(int[][] arr){
-        for (int i = 0; i < arr.length; i++) {
-            String array = Arrays.toString(arr[i]);
-            System.out.println(array);
-            System.out.println(arr[i].length);
-        }
-    }
     private static List<List<String>> loopSea(){
         List<List<String>> arrays = new ArrayList<>();
 
@@ -135,12 +127,31 @@ public class  App {
         return arrays;
     }
 
-    private static List<List<String>> setShep(int[][] _cordinat_x_y,List<List<String>> arena){
+    private static List<List<String>> setShep(int[][] _cordinat_x_y_comp,int[][] _cordinat_x_y,List<List<String>> arena){
         
         for (int i = 0; i < _cordinat_x_y.length; i++) {
             arena.get(_cordinat_x_y[i][0]).set(_cordinat_x_y[i][1], shep);
+            arena.get(_cordinat_x_y_comp[i][0]).set(_cordinat_x_y_comp[i][1], shepC);
         }
         return arena;
     }
+
+private static int[][] Computer(int[][] UsersChoice){
+    Random valueRandom = new Random();
+    int[][] computer = new int[5][2];
+    for(int i = 0; i < computer.length; i++){
+        int _cordinat_y_comp = valueRandom.nextInt(9);
+        int _cordinat_x_comp = valueRandom.nextInt(9);
+        for (int j = 0; j < computer.length; j++) {
+            if (UsersChoice[i][0] != _cordinat_y_comp && UsersChoice[i][1] != _cordinat_x_comp) {
+                computer[i][0] = _cordinat_y_comp;
+                computer[i][1] = _cordinat_x_comp;
+            }
+            
+        }
+    }
+    return computer;
+}
+
   
 }
