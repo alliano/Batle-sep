@@ -10,6 +10,7 @@ public class  App {
     private static final String sea = "0123456789";
     private static final String shep = "#";
     private static final String shepC = "@";
+    public static final Scanner terminalInput = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         System.out.println("\t\t====================");
@@ -20,10 +21,8 @@ public class  App {
     }
     
     private static void loop(int increment){
-        Boolean next = true;
-        while(next){
-            Scanner terminalInput = new Scanner(System.in);
-            
+        // Boolean next = true;
+        // while(next){
             // seep1
             System.out.println("shep1");
             int[] shep1 = Shep();
@@ -52,32 +51,27 @@ public class  App {
             int[][] computer = Computer(arrays);
             List<List<String>> newArena = setShep(computer,arrays, arena);
 
-            System.out.println(Arrays.deepToString(arrays));
-            System.out.println(Arrays.deepToString(computer));
-
-     
-
+            System.out.println(Arrays.deepToString(arrays) + "-->user");
+            System.out.println(Arrays.deepToString(computer) + "-->computer");
 
             System.out.println("\n  "+sea);
             for(int i = 0; i <= increment; i++){
                 System.out.print(i + "|");
                 for(int j = 0; j < increment; j++){
                     System.out.print(newArena.get(i).get(j));
-                    
                 }
-            
                 System.out.println("|" + i);
             }
             System.out.println("  "+sea);
             System.out.println("\n");
-            next = isnext("apakah kamu mau lanjut? ");
-        }
-        
+
+            batle(arrays,computer );
+        //     next = isnext("apakah kamu mau lanjut? ");
+        // }  
     }
 
     private static Boolean isnext(String message){
         System.out.print(message + "[Y/N] : ");
-        Scanner terminalInput = new Scanner(System.in);
         String inputuser = terminalInput.nextLine();
         Boolean cond = inputuser.equalsIgnoreCase("y");
 
@@ -104,7 +98,6 @@ public class  App {
 
     private static int[] Shep(){
         int cordinat_x,cordinat_y;
-        Scanner terminalInput = new Scanner(System.in);
         System.out.print("Enter cordinate X : ");
         cordinat_x = terminalInput.nextInt();
         System.out.print("Enter cordinat Y : ");
@@ -146,12 +139,29 @@ private static int[][] Computer(int[][] UsersChoice){
             if (UsersChoice[i][0] != _cordinat_y_comp && UsersChoice[i][1] != _cordinat_x_comp) {
                 computer[i][0] = _cordinat_y_comp;
                 computer[i][1] = _cordinat_x_comp;
-            }
-            
+            }  
         }
     }
     return computer;
 }
+
+private static void batle(int[][] user,int[][] computer){
+    
+        System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("\t\t\t!!!battle is started !!!");
+        System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
+        
+
+        System.out.print("tebak shep comp : ");
+        String inputUSer = terminalInput.nextLine();
+        System.out.println(inputUSer);
+    
+    
+    
+
+
+}
+
 
   
 }
