@@ -10,6 +10,8 @@ public class  App {
     private static final String sea = "0123456789";
     private static final String shep = "#";
     private static final String shepC = "@";
+    public static final String userDead = "x";
+    public static final String compDead = "-";
     public static final Scanner terminalInput = new Scanner(System.in);
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
@@ -65,7 +67,7 @@ public class  App {
             System.out.println("  "+sea);
             System.out.println("\n");
 
-             batle(arrays,computer );
+             batle(arrays,computer,newArena);
             
         //     next = isnext("apakah kamu mau lanjut? ");
         // }  
@@ -152,20 +154,35 @@ private static int[][] Computer(int[][] UserChoose){
     return computer;
 }
 
-private static void batle(int[][] user,int[][] computer){
+private static void batle(int[][] user,int[][] computer,List<List<String>> arena){
     
-        System.out.print("masukan nama : ");
-        String name = terminalInput.nextLine();
-        // System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
-        // System.out.println("\t\t\t!!!battle is started !!!");
-        // System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
+    System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
+    System.out.println("\t\t\t!!!battle is started !!!");
+    System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
+  
+    for (int i = 0; i < computer.length; i++) {
+        System.out.print("input cordinat y _comp : ");
+        int userChoose_y = terminalInput.nextInt();
+        System.out.print("input cordinat x _comp : ");
+        int userChoose_x = terminalInput.nextInt();
+
+        for (int j = 0; j < computer.length; j++) {
+            for (int j2 = 0; j2 < computer[j].length; j2++) {
+                if (userChoose_y == j && userChoose_x == computer[j][j2]) {
+                    System.out.println("kamu menang");
+                    
+                }else{
+                    
+                }
+            }
+        }
         
+        System.out.println(userChoose_y);
+        System.out.println(userChoose_x);
+    }
 
-        // System.out.print("tebak shep comp : ");
-        // String inputUSer = terminalInput.nextLine();
-        // System.out.println(inputUSer);
 
-       System.out.println(name);
+     
 
     
 
