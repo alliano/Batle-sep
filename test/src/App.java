@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -166,30 +167,45 @@ private static void batle(int[][] user,int[][] computer,List<List<String>> arena
         System.out.print("input cordinat x _comp : ");
         int userChoose_x = terminalInput.nextInt();
 
-            if(arena.get(userChoose_y).get(userChoose_x).contains("@")){
-                System.out.println("kamu menang");
+            if(arena.get(userChoose_y).get(userChoose_x).contains(shepC)){
                 arena.get(userChoose_y).set(userChoose_x, compDead);
+                clearSc();
+                newArena(arena);
+                System.out.println("kamu menang");
             }else{
+                clearSc();
                 System.out.println("salah");
-                System.out.println(Arrays.deepToString(computer) + "-->computer");
-                System.out.println(Arrays.deepToString(user) + "--> user");
             }
         System.out.println(userChoose_y);
-        System.out.println(userChoose_x);
-      
-            
-     
-        
+        System.out.println(userChoose_x);  
     }
-
-
-     
-
-    
-
 
 }
 
+public static void newArena(List<List<String>> arena){
+    
+    System.out.println("\n  "+sea);
+    for(int i = 0; i <= 9; i++){
+    System.out.print(i + "|");
+        for(int j = 0; j < 9; j++){
+            System.out.print(arena.get(i).get(j));
+        }
+        System.out.println("|" + i);
+    }
+    System.out.println("  "+sea);
+    System.out.println("\n");
+}
 
+public static void clearSc(){
+    try {
+        if (System.getProperty("os.name").contains("windows")) {
+            new ProcessBuilder("cmd","/c","cls").inheritIO().start().waitFor();
+        }else{
+            System.out.print("\033\143");
+        }
+    } catch (Exception e) {
+        System.err.println("canot clear Screan" + e);
+    }
+}
   
 }
