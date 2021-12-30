@@ -166,19 +166,20 @@ private static void batle(int[][] user,int[][] computer,List<List<String>> arena
         System.out.print("input cordinat x _comp : ");
         int userChoose_x = terminalInput.nextInt();
 
-        for (int j = 0; j < computer.length; j++) {
-            for (int j2 = 0; j2 < computer[j].length; j2++) {
-                if (userChoose_y == j && userChoose_x == computer[j][j2]) {
-                    System.out.println("kamu menang");
-                    
-                }else{
-                    
-                }
+            if(arena.get(userChoose_y).get(userChoose_x).contains("@")){
+                System.out.println("kamu menang");
+                arena.get(userChoose_y).set(userChoose_x, compDead);
+            }else{
+                System.out.println("salah");
+                System.out.println(Arrays.deepToString(computer) + "-->computer");
+                System.out.println(Arrays.deepToString(user) + "--> user");
             }
-        }
-        
         System.out.println(userChoose_y);
         System.out.println(userChoose_x);
+      
+            
+     
+        
     }
 
 
