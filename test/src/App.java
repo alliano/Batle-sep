@@ -50,26 +50,10 @@ public class  App {
                 shep5
             };
             List<List<String>> arena = loopSea();
-          
             int[][] computer = Computer(arrays);
             List<List<String>> newArena = setShep(computer,arrays, arena);
-
-            System.out.println(Arrays.deepToString(arrays) + "-->user");
-            System.out.println(Arrays.deepToString(computer) + "-->computer");
-
-            System.out.println("\n  "+sea);
-            for(int i = 0; i <= increment; i++){
-                System.out.print(i + "|");
-                for(int j = 0; j < increment; j++){
-                    System.out.print(newArena.get(i).get(j));
-                }
-                System.out.println("|" + i);
-            }
-            System.out.println("  "+sea);
-            System.out.println("\n");
-
-             batle(arrays,computer,newArena);
-            
+            newArena(newArena);
+            batle(computer,newArena);
         //     next = isnext("apakah kamu mau lanjut? ");
         // }  
     }
@@ -132,7 +116,6 @@ public class  App {
         }
         return arena;
     }
-
 private static int[][] Computer(int[][] UserChoose){
     Random valueRandom = new Random();
     int[][] computer = new int[5][2];
@@ -155,7 +138,7 @@ private static int[][] Computer(int[][] UserChoose){
     return computer;
 }
 
-private static void batle(int[][] user,int[][] computer,List<List<String>> arena){
+private static void batle(int[][] computer,List<List<String>> arena){
     
     System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
     System.out.println("\t\t\t!!!battle is started !!!");
