@@ -8,12 +8,13 @@ import java.util.Scanner;
 // on development
 
 public class  App {
-    private static final String sea = "0123456789";
+    private static final String sea = "0123456789 ";
     private static final String shep = "#";
     private static final String shepC = "@";
     public static final String userDead = "x";
     public static final String compDead = "-";
     public static final Scanner terminalInput = new Scanner(System.in);
+    public static final Random valueRandom = new Random();
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         System.out.println("\t\t====================");
@@ -24,31 +25,7 @@ public class  App {
     }
     
     private static void loop(int increment){
-        // Boolean next = true;
-        // while(next){
-            // seep1
-            System.out.println("shep1");
-            int[] shep1 = Shep();
-            // shep2
-            System.out.println("shep2");
-            int[] shep2 = Shep();
-            // shep3
-            System.out.println("shep3");
-            int[] shep3 = Shep();
-            // shep4
-            System.out.println("shep4");
-            int[] shep4 = Shep();
-            // shep5
-            System.out.println("shep5");
-            int[] shep5 = Shep();
-
-            int[][] arrays = {
-                shep1,
-                shep2,
-                shep3,
-                shep4,
-                shep5
-            };
+            int[][] arrays = Shep();
             List<List<String>> arena = loopSea();
             int[][] computer = Computer(arrays);
             List<List<String>> newArena = setShep(computer,arrays, arena);
@@ -84,15 +61,40 @@ public class  App {
     }
 
 
-    private static int[] Shep(){
-        int cordinat_x,cordinat_y;
-        System.out.print("Enter cordinate X : ");
-        cordinat_x = terminalInput.nextInt();
-        System.out.print("Enter cordinat Y : ");
-        cordinat_y = terminalInput.nextInt();
-        int[] cordinat = {cordinat_x,cordinat_y};
-        System.out.println("\n");
+    private static int[][] Shep(){
+        int[][] cordinat = new int[5][2];
+        int[] cordinat_y_cordinat_x = new int[2];
+        int cordinat_y,cordinat_x;
+        boolean cond = true;
+        String[] nameShep = {
+            "Shep1",
+            "Shep2",
+            "Shep3",
+            "Shep4",
+            "Shep5",
+        };
+        for (int i = 0; i < 5; i++) {
+                System.out.println(nameShep[i]);
+                System.out.print("Enter cordinate X : ");
+                cordinat_x = terminalInput.nextInt();
+                System.out.print("Enter cordinat Y : ");
+                cordinat_y = terminalInput.nextInt(); 
+                System.out.println("\n"); 
+                if (cordinat[i][0] != cordinat_y && cordinat[i][1] != cordinat_x){
+                    cordinat[i][0] = cordinat_y;
+                    cordinat[i][1] = cordinat_x;
+                }else{
+                    while(cordinat[i][0] == cordinat_y && cordinat[i][1] == cordinat_x){
+                        System.out.print("Enter cordinate X : ");
+                        cordinat_x = terminalInput.nextInt();
+                        System.out.print("Enter cordinat Y : ");
+                        cordinat_y = terminalInput.nextInt();
+                    }
+                }
+        }
         return cordinat;
+        
+       
 
     }
     private static List<List<String>> loopSea(){
@@ -117,7 +119,6 @@ public class  App {
         return arena;
     }
 private static int[][] Computer(int[][] UserChoose){
-    Random valueRandom = new Random();
     int[][] computer = new int[5][2];
     for(int i = 0; i < computer.length; i++){
         int _cordinat_y_comp = valueRandom.nextInt(9);
@@ -139,6 +140,8 @@ private static int[][] Computer(int[][] UserChoose){
 }
 
 private static void batle(int[][] computer,List<List<String>> arena){
+    int user = 0;
+    int comp = 0;
     
     System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
     System.out.println("\t\t\t!!!battle is started !!!");
@@ -154,14 +157,44 @@ private static void batle(int[][] computer,List<List<String>> arena){
                 arena.get(userChoose_y).set(userChoose_x, compDead);
                 clearSc();
                 newArena(arena);
-                System.out.println("kamu menang");
+                System.out.println("YOU ARE WIN");
+                user = user + 1;
             }else{
                 clearSc();
-                System.out.println("salah");
+                newArena(arena);
+                System.out.println("UR Choose is wrng");
             }
-        System.out.println(userChoose_y);
-        System.out.println(userChoose_x);  
+       int _cordinat_y_comp = valueRandom.nextInt(9); 
+       int _cordinat_x_comp = valueRandom.nextInt(9); 
+
+       try{
+           System.out.println("COMPUTER IS PLAY");
+           Thread.sleep(3000);
+           if (arena.get(_cordinat_y_comp).get(_cordinat_x_comp).contains(shep)){
+                System.out.println("computer win");
+                arena.get(_cordinat_y_comp).set(_cordinat_x_comp, userDead);
+                newArena(arena);
+                comp += 1;
+           }else{
+               System.out.println("cordinat_y -> "+_cordinat_y_comp);
+               System.out.println("cordinat_x -> "+_cordinat_x_comp);
+               System.out.println("COMPUTER IS MISTAKE");
+           }
+       }catch(Exception ERRHANDLING){
+            System.out.println("failed " + ERRHANDLING);
+       }
+
     }
+    if(user > comp){
+     System.out.println("YOU ARE THE WINER");
+    }else{
+        System.out.println("COMPUTER THE WINER");
+    }
+    if (comp == user){
+        System.out.println("DROW");
+    }
+    System.out.println("comp -> " + comp);
+    System.out.println("user -> " + user);
 
 }
 
@@ -170,7 +203,7 @@ public static void newArena(List<List<String>> arena){
     System.out.println("\n  "+sea);
     for(int i = 0; i <= 9; i++){
     System.out.print(i + "|");
-        for(int j = 0; j < 9; j++){
+        for(int j = 0; j < 10; j++){
             System.out.print(arena.get(i).get(j));
         }
         System.out.println("|" + i);
