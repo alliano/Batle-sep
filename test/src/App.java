@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,29 +7,32 @@ import java.util.Scanner;
 // on development
 
 public class  App {
-    private static final String sea = "0123456789 ";
+    private static final String sea = "0123456789";
     private static final String shep = "#";
     private static final String shepC = "@";
     public static final String userDead = "x";
     public static final String compDead = "-";
     public static final Scanner terminalInput = new Scanner(System.in);
     public static final Random valueRandom = new Random();
+    public static List<List<String>> arena = new ArrayList<>();
     public static void main(String[] args) throws Exception {
         System.out.println("\n");
         System.out.println("\t\t====================");
         System.out.println("\t\t=====BATLE SHIP=====");
         System.out.println("\t\t====================");
         System.out.println("\n");
-        loop(9);       
+        loop();       
     }
     
-    private static void loop(int increment){
-            int[][] arrays = Shep();
-            List<List<String>> arena = loopSea();
-            int[][] computer = Computer(arrays);
-            List<List<String>> newArena = setShep(computer,arrays, arena);
-            newArena(newArena);
-            batle(computer,newArena);
+    private static void loop(){
+            arena = loopSea();
+            int[][] userChoose = Shep();
+            int[][] computer = Computer(userChoose);
+            System.out.println(Arrays.deepToString(computer));
+            System.out.println(Arrays.deepToString(userChoose));
+           arena = setShep(computer,userChoose,arena);
+            newArena(arena);
+            batle(computer,arena);
         //     next = isnext("apakah kamu mau lanjut? ");
         // }  
     }
@@ -55,17 +57,11 @@ public class  App {
             System.err.println("======good beye=======");
             System.out.println("======================");
         }
-        
         return cond;
-
     }
-
-
     private static int[][] Shep(){
         int[][] cordinat = new int[5][2];
-        int[] cordinat_y_cordinat_x = new int[2];
         int cordinat_y,cordinat_x;
-        boolean cond = true;
         String[] nameShep = {
             "Shep1",
             "Shep2",
@@ -75,39 +71,35 @@ public class  App {
         };
         for (int i = 0; i < 5; i++) {
                 System.out.println(nameShep[i]);
-                System.out.print("Enter cordinate X : ");
+                System.out.print("Enter cordinate Y : ");
                 cordinat_x = terminalInput.nextInt();
-                System.out.print("Enter cordinat Y : ");
+                System.out.print("Enter cordinat X : ");
                 cordinat_y = terminalInput.nextInt(); 
                 System.out.println("\n"); 
-                if (cordinat[i][0] != cordinat_y && cordinat[i][1] != cordinat_x){
+
+                String cordinat_x_y = arena.get(cordinat_y).get(cordinat_x);
+                arena.get(cordinat_y).set(cordinat_x, shep);
+                
+                if(!cordinat_x_y.equals(" ")){
+                    i = i - 1;
+                    System.out.println("Cordinat cannot be the same! input Ship " + (i + 1) + " will be repeated!");
+                }else{
                     cordinat[i][0] = cordinat_y;
                     cordinat[i][1] = cordinat_x;
-                }else{
-                    while(cordinat[i][0] == cordinat_y && cordinat[i][1] == cordinat_x){
-                        System.out.print("Enter cordinate X : ");
-                        cordinat_x = terminalInput.nextInt();
-                        System.out.print("Enter cordinat Y : ");
-                        cordinat_y = terminalInput.nextInt();
-                    }
                 }
         }
         return cordinat;
-        
-       
-
     }
-    private static List<List<String>> loopSea(){
-        List<List<String>> arrays = new ArrayList<>();
 
+    private static List<List<String>> loopSea(){
         for (int i = 0; i < sea.length(); i++) {
-           arrays.add(new ArrayList<>());
+           arena.add(new ArrayList<>());
            for(int j = 0; j < sea.length(); j++){
-               arrays.get(i).add(" ");
+               arena.get(i).add(" ");
            }
         }
        
-        return arrays;
+        return arena;
     }
 
     private static List<List<String>> setShep(int[][] _cordinat_x_y_comp,int[][] _cordinat_x_y,List<List<String>> arena){
@@ -123,18 +115,18 @@ private static int[][] Computer(int[][] UserChoose){
     for(int i = 0; i < computer.length; i++){
         int _cordinat_y_comp = valueRandom.nextInt(9);
         int _cordinat_x_comp = valueRandom.nextInt(9);
-        for (int j = 0; j < computer.length; j++) {
-            if (!UserChoose[i].equals(_cordinat_y_comp)) {
-               for(int k = 0; k < computer.length; k++){
-                   for(int l = 0; l < computer[l].length; l++){
-                       if(!computer[i].equals(_cordinat_y_comp)){
-                           computer[i][0] = _cordinat_y_comp;
-                           computer[i][1] = _cordinat_x_comp;
-                       }
-                   }
-               }
-            }  
-        }
+       for (int j = 0; j < computer.length; j++) {
+                if (!UserChoose[i].equals(_cordinat_y_comp)) {
+                    for (int k = 0; k < computer.length; k++) {
+                        for (int l = 0; l < computer[l].length; l++) {
+                            if (!computer[i].equals(_cordinat_y_comp)) {
+                                computer[i][0] = _cordinat_y_comp;
+                                computer[i][1] = _cordinat_x_comp;
+                            }
+                        }
+                    }
+                }
+            }
     }
     return computer;
 }
@@ -185,16 +177,19 @@ private static void batle(int[][] computer,List<List<String>> arena){
        }
 
     }
-    if(user > comp){
-     System.out.println("YOU ARE THE WINER");
-    }else{
-        System.out.println("COMPUTER THE WINER");
-    }
-    if (comp == user){
+    if (user > comp){
+        System.out.println("secore User --> " + user);
+        System.out.println("secore comp --> " + comp);
+        System.out.println("YOU ARE WINER");
+    }else if (user < comp) {
+        System.out.println("secore User --> " + user);
+        System.out.println("secore comp --> " + comp);
+        System.out.println("YOU ARE LOSE");
+    }else if(user == comp){
+        System.out.println("secore User --> " + user);
+        System.out.println("secore comp --> " + comp);
         System.out.println("DROW");
     }
-    System.out.println("comp -> " + comp);
-    System.out.println("user -> " + user);
 
 }
 
