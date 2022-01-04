@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
@@ -29,15 +28,32 @@ public class  App {
     }
     
     private static void loop(){
-            System.out.println("Deploy Player Ships ");
+          
             arena = loopSea();
             int[][] userChoose = Shep();
             int[][] computer = Computer(userChoose);
-            System.out.println(Arrays.deepToString(computer));
-            System.out.println(Arrays.deepToString(userChoose));
+            // System.out.println(Arrays.deepToString(computer));
+            // System.out.println(Arrays.deepToString(userChoose));
            arena = setShep(computer,userChoose,arena);
             newArena(arenaDummy);
+             System.out.println("Deploy Player Ships ");
+             try{
+                Thread.sleep(1000);
+                System.out.println("deploy computer 1");
+                Thread.sleep(1000);
+                System.out.println("deploy computer 2");
+                Thread.sleep(1000);
+                System.out.println("deploy computer 3");
+                Thread.sleep(1000);
+                System.out.println("deploy computer 4");
+                Thread.sleep(1000);
+                System.out.println("deploy computer 5");
+
+            }catch(Exception errException){
+                System.out.println(errException);
+            }
             batle(computer,arena);
+              
         //     next = isnext("apakah kamu mau lanjut? ");
         // }  
     }
@@ -82,7 +98,7 @@ public class  App {
                 System.out.print("Enter cordinat X : ");
                 cordinat_y = terminalInput.nextInt(); 
                 System.out.println("\n"); 
-    
+
                 String cordinat_x_y = arena.get(cordinat_y).get(cordinat_x);
                 arena.get(cordinat_y).set(cordinat_x, shep);
                 
@@ -98,6 +114,7 @@ public class  App {
                 System.out.println("You Must Write A Number");
                 continue;
             }
+    
                 
         }
         return cordinat;
@@ -145,13 +162,12 @@ private static int[][] Computer(int[][] UserChoose){
     }
     return computer;
 }
-
 private static void batle(int[][] computer,List<List<String>> arena){
     int user = 0;
     int comp = 0;
     
     
-    for (int i = 0; i < computer.length; i++) {
+    for (int i = 0; i < 10; i++) {
         System.out.println("YOU TURN");
         try{
             System.out.print("input cordinat y _comp : ");
