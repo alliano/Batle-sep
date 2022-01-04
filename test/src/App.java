@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class  App {
     private static final String sea = "0123456789";
-    private static final String shep = "#";
-    private static final String shepC = "@";
-    public static final String userDead = "x";
+    private static final String shep = "@";
+    private static final String shepC = "#";
+    public static final String userDead = "!";
     public static final String compDead = "-";
     public static final Scanner terminalInput = new Scanner(System.in);
     public static final Random valueRandom = new Random();
@@ -18,11 +18,12 @@ public class  App {
     public static List<List<String>> arenaDummy = new ArrayList<>();
    
     public static void main(String[] args) throws Exception {
-        System.out.println("\n");
-        System.out.println("\t\t====================");
-        System.out.println("\t\t=====BATLE SHIP=====");
-        System.out.println("\t\t====================");
-        System.out.println("\n");
+        System.out.println("**** welcome to battle ship game ****\n");
+
+        System.out.println("right now, the sea is empety");
+        loopSea();
+        newArena(arenaDummy);
+
         loop();       
     }
     
@@ -141,12 +142,10 @@ private static void batle(int[][] computer,List<List<String>> arena){
     int user = 0;
     int comp = 0;
     
-    System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
-    System.out.println("\t\t\t!!!battle is started !!!");
-    System.out.println("\t\t\t!!!!!!!!!!!!!!!!!!!!!!!!");
     
     for (int i = 0; i < computer.length; i++) {
-      
+        System.out.println("YOU TURN");
+        
         System.out.print("input cordinat y _comp : ");
         int userChoose_y = terminalInput.nextInt();
         System.out.print("input cordinat x _comp : ");
@@ -166,17 +165,17 @@ private static void batle(int[][] computer,List<List<String>> arena){
                 arenaDummy.get(userChoose_y).set(userChoose_x, "!");
                 arena.get(userChoose_y).set(userChoose_x, "!");
                 newArena(arenaDummy);
-                System.out.println("UR Choose is wrng");
+                System.out.println("You missed");
             }
             
        int _cordinat_y_comp = valueRandom.nextInt(9); 
        int _cordinat_x_comp = valueRandom.nextInt(9); 
 
        try{
-           System.out.println("COMPUTER IS PLAY");
+           System.out.println("COMPUTER TURN");
            Thread.sleep(2000);
            if (arena.get(_cordinat_y_comp).get(_cordinat_x_comp).equals(shep)){
-               System.out.println("computer win");
+               System.out.println("Computer win");
                arenaDummy.get(_cordinat_y_comp).set(_cordinat_x_comp, userDead);
                arena.get(_cordinat_y_comp).set(_cordinat_x_comp, userDead);
                newArena(arenaDummy);
@@ -189,7 +188,7 @@ private static void batle(int[][] computer,List<List<String>> arena){
                newArena(arenaDummy);
                System.out.println("cordinat_y -> "+_cordinat_y_comp);
                System.out.println("cordinat_x -> "+_cordinat_x_comp);
-               System.out.println("COMPUTER IS MISTAKE");
+               System.out.println("Cmputer missed");
            }
        }catch(Exception ERRHANDLING){
             System.out.println("failed " + ERRHANDLING);
@@ -199,7 +198,7 @@ private static void batle(int[][] computer,List<List<String>> arena){
     if (user > comp){
         System.out.println("secore User --> " + user);
         System.out.println("secore comp --> " + comp);
-        System.out.println("YOU ARE WINER");
+        System.out.println("Hooray, you winer the battle");
     }else if (user < comp) {
         System.out.println("secore User --> " + user);
         System.out.println("secore comp --> " + comp);
